@@ -2,6 +2,7 @@ package com.restapi.api.Controller;
 
 import com.restapi.api.DTO.DepartmentDTO;
 import com.restapi.api.Service.DepartmentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -33,7 +34,7 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createNewDepartment(@RequestBody DepartmentDTO departmentDTO) {
+    public ResponseEntity<String> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
          departmentService.createNewDepartment(departmentDTO);
          return ResponseEntity.status(HttpStatus.CREATED).body("User is created");
     }
