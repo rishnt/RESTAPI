@@ -1,12 +1,12 @@
 package com.restapi.api.Controller;
 
 import com.restapi.api.DTO.DepartmentDTO;
-import com.restapi.api.Entity.DepartmentEntity;
-import com.restapi.api.Repository.DepartmentRepository;
 import com.restapi.api.Service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,28 +20,39 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<DepartmentDTO> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
+       List<DepartmentDTO> dept=departmentService.getAllDepartments();
+        return ResponseEntity.ok(dept);
     }
 
     @GetMapping(path = "/{departmentId}")
-    public DepartmentDTO getDepartmentById(@PathVariable Long departmentId) {
-        return departmentService.getDepartmentById(departmentId);
+    public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
+        return departmentService
+                .getDepartmentById(departmentId).map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping
-    public DepartmentDTO createNewDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        return departmentService.createNewDepartment(departmentDTO);
+    public ResponseEntity<String> createNewDepartment(@RequestBody DepartmentDTO departmentDTO) {
+         departmentService.createNewDepartment(departmentDTO);
+         return ResponseEntity.status(HttpStatus.CREATED).body("User is created");
     }
 
-    @PutMapping
-    public DepartmentDTO updateDepartmentDetails(@RequestBody DepartmentDTO departmentDTO,@PathVariable Long departmentId){
-        return departmentService.updateDepartmentDetails(departmentDTO,departmentId);
+    @PutMapping("/{departmentId}")
+    public ResponseEntity<DepartmentDTO> updateDepartmentDetails(@RequestBody DepartmentDTO departmentDTO,@PathVariable Long departmentId){
+        DepartmentDTO deptDto= departmentService.updateDepartmentDetails(departmentDTO,departmentId);
+        return ResponseEntity.status(HttpStatus.OK).body(deptDto);
     }
-
     @DeleteMapping("/{departmentId}")
-    public void deleteDepartmentById(@PathVariable Long departmentId){
+    public ResponseEntity<String> deleteDepartmentById(@PathVariable Long departmentId){
         departmentService.deleteDepartment(departmentId);
+        return ResponseEntity.status(HttpStatus.OK).body("Department Deleted");
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteAllDepartment(){
+        departmentService.deleteAllDepartment();
+        return ResponseEntity.status(HttpStatus.OK).body("All User Deleted");
     }
 }
 

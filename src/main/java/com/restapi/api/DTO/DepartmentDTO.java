@@ -18,4 +18,6 @@ public class DepartmentDTO {
     private String title;
     private Boolean isActive;
     private LocalDate createdAt;
+    private String hodName;
+    private String collegeName;
 }

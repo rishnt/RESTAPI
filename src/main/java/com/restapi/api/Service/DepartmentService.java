@@ -18,7 +18,9 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
         this.modelMapper=modelMapper;
     }
-
+    public boolean existById(Long departmentId){
+        return departmentRepository.existsById(departmentId);
+    }
     public List<DepartmentDTO> getAllDepartments() {
         List<DepartmentEntity> department = departmentRepository.findAll();
         return department.stream()
@@ -26,21 +28,23 @@ public class DepartmentService {
                         .map(departmentEntity, DepartmentDTO.class))
                 .collect(Collectors.toList());
     }
-    public DepartmentDTO getDepartmentById(Long departmentId) {
-      DepartmentEntity entity=departmentRepository.findById(departmentId).orElse(null);
-       return modelMapper.map(entity, DepartmentDTO.class);
+    public Optional<DepartmentDTO> getDepartmentById(Long departmentId) {
+      Optional<DepartmentEntity> entity=departmentRepository.findById(departmentId);
+      return entity.map(departmentEntity -> modelMapper.map(departmentEntity,DepartmentDTO.class));
+
     }
-    public DepartmentDTO createNewDepartment(DepartmentDTO departmentDTO) {
+    public String createNewDepartment(DepartmentDTO departmentDTO) {
         DepartmentEntity entity=modelMapper.map(departmentDTO, DepartmentEntity.class);
         DepartmentEntity savedEntity= departmentRepository.save(entity);
-        return modelMapper.map(savedEntity, DepartmentDTO.class);
+        return "User Created";
     }
 
     public void deleteDepartment(Long departmentId) {
         departmentRepository.deleteById(departmentId);
     }
 
-    public DepartmentDTO updateDepartmentDetails(DepartmentDTO departmentDTO,Long departmentId) {
+
+    public DepartmentDTO updateDepartmentDetails(DepartmentDTO departmentDTO,Long departmentId){
         if(departmentRepository.existsById(departmentId)){
             DepartmentEntity departmentEntity=modelMapper.map(departmentDTO,DepartmentEntity.class);
             departmentEntity.setId(departmentId);
@@ -48,5 +52,9 @@ public class DepartmentService {
             return modelMapper.map(savedEntity,DepartmentDTO.class);
         }
 return null;
+    }
+
+    public void deleteAllDepartment() {
+        departmentRepository.deleteAll();
     }
 }

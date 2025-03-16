@@ -21,5 +21,6 @@ public class DepartmentEntity {
     private Boolean isActive;
     @CreationTimestamp
     private LocalDate createdAt;
-
+    private String hodName;
+    private String collegeName;
 }
