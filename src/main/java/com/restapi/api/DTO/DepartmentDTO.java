@@ -2,6 +2,7 @@ package com.restapi.api.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restapi.api.NameValidation.Validname;
+import com.restapi.api.NameValidation.collegeNameValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -25,6 +26,6 @@ public class DepartmentDTO {
     private LocalDate createdAt;
     @NotBlank @Validname
     private String hodName;
-    @NotBlank @Length(min=1,max = 20)
+    @NotBlank @Length(min=1,max = 20) @collegeNameValidation
     private String collegeName;
 }
