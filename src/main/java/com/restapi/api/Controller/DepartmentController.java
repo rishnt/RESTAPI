@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/departments")
@@ -28,7 +30,7 @@ public class DepartmentController {
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
         return departmentService
                 .getDepartmentById(departmentId).map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                .orElseThrow(() -> new NoSuchElementException("the user does not exist"));
     }
     @PostMapping
     public ResponseEntity<String> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
