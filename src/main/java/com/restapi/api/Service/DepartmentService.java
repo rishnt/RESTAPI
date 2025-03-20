@@ -39,8 +39,12 @@ public class DepartmentService {
         return "User Created";
     }
 
-    public void deleteDepartment(Long departmentId) {
-        departmentRepository.deleteById(departmentId);
+    public boolean deleteDepartment(Long departmentId) {
+        if(departmentRepository.existsById(departmentId)){
+            departmentRepository.deleteById(departmentId);
+            return true;
+        }
+        return false;
     }
 
 

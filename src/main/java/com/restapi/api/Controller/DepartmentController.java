@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/departments")
@@ -25,14 +24,12 @@ public class DepartmentController {
        List<DepartmentDTO> dept=departmentService.getAllDepartments();
         return ResponseEntity.ok(dept);
     }
-
     @GetMapping(path = "/{departmentId}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
         return departmentService
                 .getDepartmentById(departmentId).map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
-
     @PostMapping
     public ResponseEntity<String> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
          departmentService.createNewDepartment(departmentDTO);
@@ -46,10 +43,10 @@ public class DepartmentController {
     }
     @DeleteMapping("/{departmentId}")
     public ResponseEntity<String> deleteDepartmentById(@PathVariable Long departmentId){
-        departmentService.deleteDepartment(departmentId);
-        return ResponseEntity.status(HttpStatus.OK).body("Department Deleted");
+       boolean status= departmentService.deleteDepartment(departmentId);
+       if(status) return ResponseEntity.status(HttpStatus.OK).body("Department Deleted");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("department does not exist");
     }
-
     @DeleteMapping
     public ResponseEntity deleteAllDepartment(){
         departmentService.deleteAllDepartment();
