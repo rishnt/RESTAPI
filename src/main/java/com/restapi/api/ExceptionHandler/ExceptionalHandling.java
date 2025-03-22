@@ -23,5 +23,11 @@ public class ExceptionalHandling {
         ErrorResponse response=new ErrorResponse(e.getMessage(),"active");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException e){
+        ErrorResponse resp=new ErrorResponse(e.getMessage(),"the User is not Present");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resp);
+    }
 }
 
