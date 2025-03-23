@@ -30,12 +30,12 @@ public class DepartmentController {
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
         return departmentService
                 .getDepartmentById(departmentId).map(ResponseEntity::ok)
-                .orElseThrow(() -> new NoSuchElementException("the user does not exist"));
+                .orElseThrow(() -> new NoSuchElementException("The user is not Found"));
     }
     @PostMapping
-    public ResponseEntity<String> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
-         departmentService.createNewDepartment(departmentDTO);
-         return ResponseEntity.status(HttpStatus.CREATED).body("User is created");
+    public ResponseEntity<DepartmentDTO> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
+         DepartmentDTO dept=departmentService.createNewDepartment(departmentDTO);
+         return new ResponseEntity<>(dept,HttpStatus.CREATED);
     }
 
     @PutMapping("/{departmentId}")

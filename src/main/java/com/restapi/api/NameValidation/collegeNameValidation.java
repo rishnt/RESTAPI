@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface collegeNameValidation {
-    String message() default "{jakarta.validation.constraints.NotBlank.message}";
+    String message() default "the college name is not correct";
 
     Class<?>[] groups() default {};
 

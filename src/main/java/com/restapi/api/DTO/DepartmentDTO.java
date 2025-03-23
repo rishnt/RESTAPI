@@ -24,8 +24,8 @@ public class DepartmentDTO {
     private String title;
     private Boolean isActive;
     private LocalDate createdAt;
-    @NotBlank @Validname
+    @Validname
     private String hodName;
-    @NotBlank @Length(min=1,max = 20) @collegeNameValidation
+    @Length(min=1,max = 20) @collegeNameValidation
     private String collegeName;
 }

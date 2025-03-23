@@ -33,10 +33,10 @@ public class DepartmentService {
       return entity.map(departmentEntity -> modelMapper.map(departmentEntity,DepartmentDTO.class));
 
     }
-    public String createNewDepartment(DepartmentDTO departmentDTO) {
+    public DepartmentDTO createNewDepartment(DepartmentDTO departmentDTO) {
         DepartmentEntity entity=modelMapper.map(departmentDTO, DepartmentEntity.class);
         DepartmentEntity savedEntity= departmentRepository.save(entity);
-        return "User Created";
+        return modelMapper.map(savedEntity,DepartmentDTO.class);
     }
 
     public boolean deleteDepartment(Long departmentId) {

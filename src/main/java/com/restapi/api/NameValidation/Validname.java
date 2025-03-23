@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface Validname {
-    String message() default "{jakarta.validation.constraints.NotBlank.message}";
+    String message() default "the name should be all caps";
 
     Class<?>[] groups() default {};
 
