@@ -5,9 +5,7 @@ import com.restapi.api.Service.DepartmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -54,5 +52,6 @@ public class DepartmentController {
         departmentService.deleteAllDepartment();
         return ResponseEntity.status(HttpStatus.OK).body("All User Deleted");
     }
+
 }
 
