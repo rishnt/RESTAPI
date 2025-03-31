@@ -18,7 +18,7 @@ public class DepartmentController {
     DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-
+         
     @GetMapping
     public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
        List<DepartmentDTO> dept=departmentService.getAllDepartments();
