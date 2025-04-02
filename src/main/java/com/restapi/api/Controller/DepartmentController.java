@@ -18,7 +18,7 @@ public class DepartmentController {
     DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-         
+
     @GetMapping
     public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
        List<DepartmentDTO> dept=departmentService.getAllDepartments();
@@ -38,7 +38,7 @@ public class DepartmentController {
 
     @PutMapping("/{departmentId}")
     public ResponseEntity<DepartmentDTO> updateDepartmentDetails(@RequestBody DepartmentDTO departmentDTO,@PathVariable Long departmentId){
-        DepartmentDTO deptDto= departmentService.updateDepartmentDetails(departmentDTO,departmentId);
+        DepartmentDTO  deptDto= departmentService.updateDepartmentDetails(departmentDTO,departmentId);
         return ResponseEntity.status(HttpStatus.OK).body(deptDto);
     }
     @DeleteMapping("/{departmentId}")
