@@ -28,7 +28,7 @@ public class DepartmentController {
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
         return departmentService
                 .getDepartmentById(departmentId).map(ResponseEntity::ok)
-                .orElseThrow(() -> new NoSuchElementException("The user is not Found"));
+                .orElseThrow(() -> new NoSuchElementException("user not Found"));
     }
     @PostMapping
     public ResponseEntity<DepartmentDTO> createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO) {
