@@ -6,18 +6,18 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 public class DepartmentDTO {
     private Long id;
     @NotBlank
     private String title;
     private Boolean isActive;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     @Validname
     private String hodName;
     @Length(min=1,max = 20) @collegeNameValidation

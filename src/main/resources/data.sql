@@ -1,0 +1,5 @@
+--INSERT INTO api.department_table (title,hod_name,college_name,is_active)
+--VALUES
+--('CSE', 'Rahul Sonkar','IMS Ghaziabad',1),
+--('IT', 'Prashant Mishra','GL Bajaj',1),
+--('Mechanical', 'Abhishek Tripathi','DL Group',1);

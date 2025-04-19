@@ -4,14 +4,22 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor @Builder
-@Table(name="DepartmentTable")
+@Table(
+        name="DepartmentTable",
+        schema = "College Department",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "hodName")},
+        indexes = {
+                @Index(name = "idx_title",columnList = "title"),
+                @Index(name = "idx_hodName",columnList = "hodName")
+        }
+)
 public class DepartmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +28,8 @@ public class DepartmentEntity {
     @JsonProperty("isActive")
     private Boolean isActive;
     @CreationTimestamp
-    private LocalDate createdAt;
+    @Column(name="created_at", updatable = false)
+    private LocalDateTime createdAt;
     private String hodName;
     private String collegeName;
 }
