@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class ApiApplicationTests {
@@ -29,9 +30,14 @@ class ApiApplicationTests {
 
 	@Test
 	void getData(){
-		List<DepartmentEntity> en=departmentRepository.findByTitle("CSE");
 		List<DepartmentEntity> entity=departmentRepository.findDistinctByHodName("Prashant Mishra");
 		System.out.println(entity);
+
+	}
+
+	@Test
+	void singleEntity(){
+		Optional<DepartmentEntity> en=departmentRepository.findByTitle("CSE");
 		System.out.println(en);
 	}
 }
