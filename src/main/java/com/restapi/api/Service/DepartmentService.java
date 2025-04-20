@@ -4,6 +4,8 @@ import com.restapi.api.DTO.DepartmentDTO;
 import com.restapi.api.Entity.DepartmentEntity;
 import com.restapi.api.Repository.DepartmentRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -63,8 +65,9 @@ return null;
         departmentRepository.deleteAll();
     }
 
-    public List<DepartmentEntity> sortData(String sort, String name) {
+    public List<DepartmentEntity> sortData(String sort, String name,Long pageNumber,Long pageSize) {
       Sort sortBy= Sort.by(sort).ascending().and(Sort.by(name)).ascending();
-      return departmentRepository.findAll(sortBy);
+      Pageable page= PageRequest.of(pageNumber.intValue(),pageSize.intValue(),sortBy);
+      return departmentRepository.findAll(page).getContent();
     }
 }

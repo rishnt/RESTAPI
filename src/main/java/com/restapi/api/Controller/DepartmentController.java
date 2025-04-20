@@ -5,16 +5,21 @@ import com.restapi.api.Entity.DepartmentEntity;
 import com.restapi.api.Service.DepartmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.PrivateKey;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
+    private long PAGE_SIZE=5;
     @Autowired
     private final DepartmentService departmentService;
     DepartmentController(DepartmentService departmentService) {
@@ -55,11 +60,14 @@ public class DepartmentController {
         return ResponseEntity.status(HttpStatus.OK).body("All User Deleted");
     }
 
-    @GetMapping("/{sort}")
-    public List<DepartmentEntity> sortData(@RequestParam(defaultValue = "id") String sortBy,
-                                           @RequestParam(defaultValue = "hodName",required = false) String thenBy){
-       return departmentService.sortData(sortBy,thenBy);
-    }
+        @GetMapping("/sort")
+        public List<DepartmentEntity> sortData(@RequestParam(defaultValue = "id") String sortBy,
+                                               @RequestParam(defaultValue = "hodName",required = false) String thenBy,
+                                               @RequestParam(defaultValue = "0") Long pageNumber){
+         return departmentService.sortData(sortBy,thenBy,pageNumber,PAGE_SIZE);
+        }
+
+
 
 }
 
