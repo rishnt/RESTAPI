@@ -4,6 +4,7 @@ import com.restapi.api.DTO.DepartmentDTO;
 import com.restapi.api.Entity.DepartmentEntity;
 import com.restapi.api.Repository.DepartmentRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,5 +61,10 @@ return null;
 
     public void deleteAllDepartment() {
         departmentRepository.deleteAll();
+    }
+
+    public List<DepartmentEntity> sortData(String sort, String name) {
+      Sort sortBy= Sort.by(sort).ascending().and(Sort.by(name)).ascending();
+      return departmentRepository.findAll(sortBy);
     }
 }

@@ -1,9 +1,11 @@
 package com.restapi.api.Controller;
 
 import com.restapi.api.DTO.DepartmentDTO;
+import com.restapi.api.Entity.DepartmentEntity;
 import com.restapi.api.Service.DepartmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,7 @@ public class DepartmentController {
        List<DepartmentDTO> dept=departmentService.getAllDepartments();
         return ResponseEntity.ok(dept);
     }
-    @GetMapping(path = "/{departmentId}")
+    @GetMapping(path = "/{departmentId:[0-9]+}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable Long departmentId) {
         return departmentService
                 .getDepartmentById(departmentId).map(ResponseEntity::ok)
@@ -51,6 +53,12 @@ public class DepartmentController {
     public ResponseEntity deleteAllDepartment(){
         departmentService.deleteAllDepartment();
         return ResponseEntity.status(HttpStatus.OK).body("All User Deleted");
+    }
+
+    @GetMapping("/{sort}")
+    public List<DepartmentEntity> sortData(@RequestParam(defaultValue = "id") String sortBy,
+                                           @RequestParam(defaultValue = "hodName",required = false) String thenBy){
+       return departmentService.sortData(sortBy,thenBy);
     }
 
 }

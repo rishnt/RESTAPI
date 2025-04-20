@@ -1,5 +1,18 @@
---INSERT INTO api.department_table (title,hod_name,college_name,is_active)
+--INSERT INTO api.department_table (title, hod_name, college_name, is_active)
 --VALUES
---('CSE', 'Rahul Sonkar','IMS Ghaziabad',1),
---('IT', 'Prashant Mishra','GL Bajaj',1),
---('Mechanical', 'Abhishek Tripathi','DL Group',1);
+--('CSE', 'Rahul Sonkar','IMS Ghaziabad', 1),
+--('IT', 'Amit Sharma','ABES Engineering College', 1),
+--('Mechanical', 'Priya Verma','KIET Group of Institutions', 1),
+--('Electrical', 'Rohan Mehta','GL Bajaj Institute', 1),
+--('Civil', 'Sonal Kapoor','JSS Noida', 1),
+--('Electronics', 'Manish Bansal','IPEC Ghaziabad', 1),
+--('Aerospace', 'Nikhil Pandey','Bennett University', 1),
+--('Chemical', 'Divya Narang','Galgotias College', 1),
+--('Biotech', 'Saurabh Dixit','Sharda University', 1),
+--('Pharmacy', 'Neha Raj','ITS College of Pharmacy', 1),
+--('Architecture', 'Ankit Rathi','Amity University Noida', 1),
+--('AI & ML', 'Kavita Yadav','GLA University', 1),
+--('Data Science', 'Vivek Chauhan','SRM University NCR Campus', 1),
+--('Robotics', 'Sakshi Gupta','HITM Greater Noida', 1),
+--('Food Tech', 'Rahul Dubey','IEC College', 1),
+--('Marine Engineering', 'Pooja Singh','Bharat Institute of Tech', 1);
